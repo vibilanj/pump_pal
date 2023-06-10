@@ -9,7 +9,7 @@
 - [ ] Connect the backend to the database and handle database operations (e.g., CRUD operations for user accounts, workout logs, etc.).
 - [ ] Implement data retrieval and manipulation logic to calculate performance metrics based on logged workouts.
 - [ ] Integrate with external APIs if needed (e.g., for exercise data or performance analytics).
-- [ ] Write unit tests to ensure the correctness of backend functionality.
+- [ ] Write unit tests to ensuvre the correctness of backend functionality.
 
 # Frontend (Svelte):
 
@@ -30,6 +30,6 @@
 - [ ] Decide on a hosting solution for your backend and frontend (e.g., cloud platform, VPS, or serverless).
 - [ ] Set up a continuous integration and deployment (CI/CD) pipeline to automate testing and deployment processes.
 - [ ] Implement error handling and logging mechanisms to track and debug issues.
-- [ ] Apply appropriate security measures, including data encryption, secure communication (HTTPS), and protection against common web vulnerabilities (e.g., - [ ] Cross-Site Scripting, Cross-Site Request Forgery).
+- [ ] Apply appropriate security measures, including data encryption, secure communication (HTTPS), and protection against common web vulnerabilities (e.g., Cross-Site Scripting, Cross-Site Request Forgery).
 - [ ] Conduct user testing and gather feedback to improve the application's usability and performance.
 - [ ] Refactor and optimize code as needed to improve maintainability and performance.
