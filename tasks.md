@@ -9,7 +9,7 @@
 - [ ] Connect the backend to the database and handle database operations (e.g., CRUD operations for user accounts, workout logs, etc.).
 - [ ] Implement data retrieval and manipulation logic to calculate performance metrics based on logged workouts.
 - [ ] Integrate with external APIs if needed (e.g., for exercise data or performance analytics).
-- [ ] Write unit tests to ensuvre the correctness of backend functionality.
+- [ ] Write unit tests to ensure the correctness of backend functionality.
 
 # Frontend (Svelte):
 

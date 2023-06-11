@@ -1,0 +1,4 @@
+(executable
+ (public_name pump_pal_backend)
+ (name main)
+ (libraries pump_pal_backend))
