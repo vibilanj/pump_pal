@@ -1,5 +1,5 @@
 {
-	"name": "pump-pal-frontend",
+	"name": "frontend",
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite dev",
