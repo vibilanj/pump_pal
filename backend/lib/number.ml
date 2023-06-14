@@ -1,0 +1,1 @@
+let times_itself n = n * n
