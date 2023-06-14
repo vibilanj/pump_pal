@@ -8,6 +8,7 @@ Gym Performance Tracker and Dashboard
 # Backend Setup
 
 1. Followed https://ocaml.org/docs/up-and-running
+2. Dune lib structure: https://stackoverflow.com/questions/67462284/how-to-have-nested-libraries-confused-about-dune-etc
 
 # Frontend Setup 
 
