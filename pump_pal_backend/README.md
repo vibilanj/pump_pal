@@ -1,2 +1,0 @@
-# Pump Pal Backend
-
