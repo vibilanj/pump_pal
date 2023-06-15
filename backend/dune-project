@@ -7,9 +7,9 @@
 (source
  (github username/reponame))
 
-(authors "Author Name")
+(authors "Jerri and Vib")
 
-(maintainers "Maintainer Name")
+(maintainers "Jerri and Vib")
 
 (license LICENSE)
 
@@ -18,7 +18,7 @@
 (package
  (name backend)
  (synopsis "A short synopsis")
- (description "A longer description")
+ (description "An app that keeps track of work out plans")
  (depends ocaml dune)
  (tags
   (topics "to describe" your project)))
