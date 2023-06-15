@@ -1,2 +1,2 @@
 let () = print_endline "Hello, Jerri!"
-let () = print_endline (Backend.String.stringify 3)
+let () = print_endline (Lib.String.stringify 3)
