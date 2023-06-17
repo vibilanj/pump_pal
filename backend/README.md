@@ -3,6 +3,7 @@
 ## Table of contents
 1. [Managing Isolated Environment](#managing-isolated-environment)
 2. [Dune Lib Submodules](#dune-lib-submodules)
+3. [Running the app](#running-the-app)
 
 ## Managing Isolated Environment
 ### First installation
@@ -85,4 +86,10 @@ let () =
 
 More information can be found [here](https://stackoverflow.com/questions/67462284/how-to-have-nested-libraries-confused-about-dune-etc).
 
-## Project Structure
+## Running the app
+
+To run the server, ensure you have the proper environment set up and run the following command:
+
+```shell
+dune build && dune exec backend
+```
