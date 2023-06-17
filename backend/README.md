@@ -16,7 +16,7 @@ eval $(opam env)
 Assuming that you already have `pp-backend-env`, run the following command if there are changes to the environment
 ```bash
 opam switch import pp-backend-env --switch pp-backend-env
-opam reinstall pp-backend-env
+opam switch reinstall pp-backend-env
 eval $(opam env)
 ```
 
