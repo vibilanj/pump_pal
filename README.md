@@ -10,6 +10,13 @@ Gym Performance Tracker and Dashboard
 1. Followed https://ocaml.org/docs/up-and-running
 2. Dune lib structure: https://stackoverflow.com/questions/67462284/how-to-have-nested-libraries-confused-about-dune-etc
 
+## Stack
+- Dream web framework
+    - Caqti to connect to the DB
+    - PostgreSQL DB
+    - 
+    
+
 # Frontend Setup 
 
 1. Used Vite
