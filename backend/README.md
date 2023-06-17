@@ -37,6 +37,14 @@ opam switch export pp-backend-env
 opam switch list
 ```
 
+### Troubleshooting
+If some of the packages are not installed, run the following:
+```bash
+opam switch import pp-backend-env --switch pp-backend-env
+eval $(opam env)
+```
+Then, reload the IDE window.
+
 ### Resources
 More information about `opam switch` can be found [here](https://opam.ocaml.org/doc/man/opam-switch.html).
 
