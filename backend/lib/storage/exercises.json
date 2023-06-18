@@ -1,0 +1,53 @@
+[
+    {
+      "name": "bench",
+      "sets": [
+        {
+          "weight": 60,
+          "reps": 10
+        },
+        {
+          "weight": 70,
+          "reps": 10
+        },
+        {
+          "weight": 80,
+          "reps": 10
+        }
+      ]
+    },
+    {
+      "name": "squat",
+      "sets": [
+        {
+          "weight": 80,
+          "reps": 10
+        },
+        {
+          "weight": 100,
+          "reps": 10
+        },
+        {
+          "weight": 120,
+          "reps": 10
+        }
+      ]
+    },
+    {
+      "name": "deadlift",
+      "sets": [
+        {
+          "weight": 120,
+          "reps": 10
+        },
+        {
+          "weight": 150,
+          "reps": 10
+        },
+        {
+          "weight": 150,
+          "reps": 8
+        }
+      ]
+    }
+  ]

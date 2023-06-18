@@ -1,29 +1,12 @@
-let successful = ref 0
-let failed = ref 0
-
-let count_requests (inner_handler: Dream.handler) (request: Dream.request) : Dream.response Lwt.t =
-  try%lwt 
-    let%lwt response = inner_handler request in 
-    successful := !successful + 1;
-    Lwt.return response
-  
-  with exn ->
-    failed := !failed + 1;
-    raise exn
-
-
-
 let () =
   Dream.run 
   @@ Dream.logger
-  @@ count_requests
+  @@ Dream.origin_referrer_check
   @@ Dream.router [
-    Dream.get "/fail" 
-      (fun _ -> 
-        raise (Failure "The Web app failed!"));
 
-    Dream.get "/" (fun _ -> 
-      Dream.html (Printf.sprintf
-        "%3i requests(s) successful<br>%3i request(s) failed"
-        !successful !failed));
+    Dream.get "/exercises" (fun _ -> 
+      (* Dream.json "[{\"exercise\":\"bench\",\"sets\":[{\"weight\":60,\"reps\":10},{\"weight\":70,\"reps\":10},{\"weight\":80,\"reps\":10}]},{\"exercise\":\"squat\",\"sets\":[{\"weight\":80,\"reps\":10},{\"weight\":100,\"reps\":10},{\"weight\":120,\"reps\":10}]},{\"exercise\":\"deadlift\",\"sets\":[{\"weight\":120,\"reps\":10},{\"weight\":150,\"reps\":10},{\"weight\":150,\"reps\":8}]}]" *)
+      Dream.json (Storage.read_exercises ())
+      )  
+  
   ]
