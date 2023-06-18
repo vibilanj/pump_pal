@@ -8,6 +8,7 @@ roots: [
   "ocaml-lsp-server.1.15.1-5.0"
   "ocamlformat.0.25.1"
   "odoc.2.2.0"
+  "ppx_deriving_yojson.3.7.0"
   "utop.2.12.1"
   "yojson.2.1.0"
 ]
@@ -115,6 +116,8 @@ installed: [
   "pecu.0.6"
   "pp.1.1.2"
   "ppx_derivers.1.2.1"
+  "ppx_deriving.5.2.1"
+  "ppx_deriving_yojson.3.7.0"
   "ppx_yojson_conv_lib.v0.15.0"
   "ppxlib.0.29.1"
   "prettym.0.0.3"

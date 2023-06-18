@@ -1,6 +1,6 @@
-let exercises_handler _ = 
-  Storage.read_exercises () |> Lwt_main.run |> Dream.json
-
+let exercises = (fun _ -> 
+  let%lwt res = (Storage.read_exercises ()) 
+  in Dream.json res)
 
 let () =
   Dream.run 
@@ -8,6 +8,6 @@ let () =
   @@ Dream.origin_referrer_check
   @@ Dream.router [
 
-    Dream.get "/exercises" exercises_handler
+    Dream.get "/exercises" exercises
 
     ]
