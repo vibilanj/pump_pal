@@ -3,7 +3,8 @@
 ## Table of contents
 1. [Managing Isolated Environment](#managing-isolated-environment)
 2. [Dune Lib Submodules](#dune-lib-submodules)
-3. [Running the app](#running-the-app)
+3. [Running The App](#running-the-app)
+4. [Setting Up Postgres DB](#setting-up-postgres-db)
 
 ## Managing Isolated Environment
 ### First installation
@@ -101,3 +102,14 @@ To run the server, ensure you have the proper environment set up and run the fol
 ```shell
 dune build && dune exec backend
 ```
+
+## Setting Up Postgres DB
+To set up the docker container:
+```shell
+cd db
+docker-compose up -d
+```
+
+The connection URL should be `postgresql://pumppal:pumppal@localhost:5432/ppDB`
+
+More customisaton can follow [here](https://1kevinson.com/how-to-create-a-postgres-database-in-docker/).
