@@ -1,5 +1,5 @@
 (executable
  (public_name backend)
  (name main)
- (libraries dream storage)
+ (libraries dream storage auth)
  (preprocess (pps lwt_ppx)))

@@ -1,0 +1,1 @@
+type user = { username : string; password : string } [@@deriving yojson]
