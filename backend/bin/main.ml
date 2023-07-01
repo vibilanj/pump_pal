@@ -4,7 +4,7 @@ let exercises _ =
 
 let users _ =
   let%lwt res = Auth.show_all_users () in
-  Dream.json res
+  Dream.json @@ Yojson.Safe.to_string res
 
 let add_user request =
   let%lwt body = Dream.body request in
@@ -17,13 +17,14 @@ let add_user request =
     | Error error -> raise (Invalid_argument error)
   in
   let%lwt () = Auth.add_user message in
-  Dream.respond ~status:`OK "ok"
+  Dream.respond ~status:`OK "Added User"
 
 let () =
-  Dream.run @@ Dream.logger @@ Dream.origin_referrer_check
-  @@ Dream.router
-       [
-         Dream.get "/exercises" exercises;
-         Dream.get "/users" users;
-         Dream.post "/users" add_user;
-       ]
+  Dream.run 
+  @@ Dream.logger 
+  @@ Dream.origin_referrer_check
+  @@ Dream.router [
+    Dream.get "/exercises" exercises;
+    Dream.get "/users" users;
+    Dream.post "/users" add_user;
+  ]
