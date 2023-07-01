@@ -3,6 +3,7 @@ services:
     image: "postgres:15.3-alpine"
     container_name: ppDB
     environment:
+      POSTGRES_DB: pumppal
       POSTGRES_USER: pumppal
       POSTGRES_PASSWORD: pumppal
     ports:
