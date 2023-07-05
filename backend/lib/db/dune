@@ -1,0 +1,4 @@
+(library
+ (name db)
+ (libraries lwt lwt.unix caqti caqti-lwt caqti-driver-postgresql ppx_rapper_lwt)
+ (preprocess (pps ppx_deriving_yojson lwt_ppx)))
