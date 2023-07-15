@@ -19,6 +19,10 @@ let add_user request =
   let%lwt () = Auth.add_user message in
   Dream.respond ~status:`OK "Added User"
 
+  let workouts _ =
+    let%lwt res = Workouts.read_all_workouts () in
+    Dream.json @@ Yojson.Safe.to_string res
+
 let () =
   Dream.run 
   @@ Dream.logger 
@@ -27,4 +31,5 @@ let () =
     Dream.get "/exercises" exercises;
     Dream.get "/users" users;
     Dream.post "/users" add_user;
+    Dream.get "/workouts" workouts;
   ]

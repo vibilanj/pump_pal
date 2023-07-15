@@ -15,7 +15,7 @@ let ensure_table_exists =
       {sql|
         CREATE TABLE IF NOT EXISTS users (
           username VARCHAR PRIMARY KEY NOT NULL,
-          password VARCHAR
+          password VARCHAR NOT NULL
         );
       |sql}]
     ()
