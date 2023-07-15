@@ -5,12 +5,12 @@ type workout_stored = {id: int; date: string; username: string; workout: string}
 type workouts_stored = workout_stored list [@@deriving yojson]
 
 (* migrations *)
-(* let drop_table =
+let drop_table =
   [%rapper execute {sql|
           DROP TABLE IF EXISTS workouts;
         |sql}] ()
 
-let () = dispatch drop_table |> Lwt_main.run *)
+let () = Db.dispatch drop_table |> Lwt_main.run
 
 let ensure_table_exists =
   [%rapper

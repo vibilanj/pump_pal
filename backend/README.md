@@ -113,3 +113,14 @@ docker-compose up -d
 The connection URL should be `postgresql://pumppal:pumppal@localhost:5432/ppDB`
 
 More customisaton can follow [here](https://1kevinson.com/how-to-create-a-postgres-database-in-docker/).
+
+## Accessing Database
+To access Docker 
+```shell
+docker exec -it ppDB sh
+```
+
+login
+```shell
+psql -U pumppal
+```
