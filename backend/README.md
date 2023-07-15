@@ -115,12 +115,13 @@ The connection URL should be `postgresql://pumppal:pumppal@localhost:5432/ppDB`
 More customisaton can follow [here](https://1kevinson.com/how-to-create-a-postgres-database-in-docker/).
 
 ## Accessing Database
-To access Docker 
+To access the database in docker, run
 ```shell
 docker exec -it ppDB sh
-```
-
-login
-```shell
 psql -U pumppal
 ```
+
+## Sending Test Requests
+
+When sending test requests with the origin checker, make sure to use the following header:
+`Origin: http://localhost:8080`

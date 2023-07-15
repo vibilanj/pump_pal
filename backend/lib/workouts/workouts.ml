@@ -1,8 +1,11 @@
 type set = { weight : float; reps : int } [@@deriving yojson]
 type exercise = { name : string; sets : set list } [@@deriving yojson]
 type workout = exercise list [@@deriving yojson]
-type workout_stored = {id: int; date: string; username: string; workout: string} [@@deriving yojson]
+
+type workout_stored = {id: int; date: int64; username: string; workout: string} [@@deriving yojson]
 type workouts_stored = workout_stored list [@@deriving yojson]
+
+type workout_for_user = { username : string; workout : string } [@@deriving yojson]
 
 (* migrations *)
 let drop_table =
@@ -18,7 +21,7 @@ let ensure_table_exists =
       {sql|
         CREATE TABLE IF NOT EXISTS workouts (
           id SERIAL PRIMARY KEY NOT NULL,
-          date VARCHAR NOT NULL,
+          date BIGINT NOT NULL,
           username VARCHAR NOT NULL,
           workout JSON NOT NULL
         );
@@ -29,26 +32,46 @@ let () = Db.dispatch ensure_table_exists |> Lwt_main.run
 
 (* queries *)
 let read_all_workouts () =
-  let show_all =
+  let read_all =
     [%rapper
       get_many
         {sql| 
-          SELECT @int{id}, @string{date}, @string{username}, @string{workout}
+          SELECT @int{id}, @int64{date}, @string{username}, @string{workout}
           FROM workouts
         |sql}
         record_out]
       ()
   in
-  let%lwt workouts = Db.dispatch show_all in
+  let%lwt workouts = Db.dispatch read_all in
   workouts_stored_to_yojson workouts |> Lwt.return
 
-let insert_workout =
+
+type user = { username : string }
+let read_workouts_for_user user =
+  let read_for_user =
     [%rapper
-    execute
-      {sql|
-        INSERT INTO workouts
-        VALUES(default, '2022-01-01', 'jerri', '[{"name":"bench","sets":[{"weight":60,"reps":10},{"weight":70,"reps":10},{"weight":80,"reps":10}]},{"name":"squat","sets":[{"weight":80,"reps":10},{"weight":100,"reps":10},{"weight":120,"reps":10}]},{"name":"deadlift","sets":[{"weight":120,"reps":10},{"weight":150,"reps":10},{"weight":150,"reps":8}]}]')
-      |sql}
-      ] ()
-      
-let () = Db.dispatch insert_workout |> Lwt_main.run
+      get_many
+        {sql| 
+          SELECT @int{id}, @int64{date}, @string{username}, @string{workout}
+          FROM workouts
+          WHERE username = %string{username} 
+        |sql}
+        record_in record_out]
+  in
+  let%lwt workouts = Db.dispatch (read_for_user  { username = user }) in
+  workouts_stored_to_yojson workouts |> Lwt.return
+
+type workout_added = { time : int64; username : string; workout : string }
+let add_workout (workout_for_user : workout_for_user) =
+  let time = Int64.of_float @@ Unix.time () in
+  let workout_added = { time = time; username = workout_for_user.username ; workout = workout_for_user.workout } in
+  let add = 
+    [%rapper
+      execute
+        {sql|
+          INSERT INTO workouts
+          VALUES(default, %int64{time}, %string{username}, %string{workout})
+        |sql}
+        record_in]
+  in
+  Db.dispatch (add workout_added)
