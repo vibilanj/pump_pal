@@ -2,11 +2,6 @@ type set = { weight : float; reps : int } [@@deriving yojson]
 type exercise = { name : string; sets : set list } [@@deriving yojson]
 type workout = exercise list [@@deriving yojson]
 
-type workout_stored = {id: int; date: int64; username: string; workout: string} [@@deriving yojson]
-type workouts_stored = workout_stored list [@@deriving yojson]
-
-type workout_for_user = { username : string; workout : string } [@@deriving yojson]
-
 (* migrations *)
 let drop_table =
   [%rapper execute {sql|
@@ -31,6 +26,9 @@ let ensure_table_exists =
 let () = Db.dispatch ensure_table_exists |> Lwt_main.run
 
 (* queries *)
+type workout_stored = {id: int; date: int64; username: string; workout: string} [@@deriving yojson]
+type workouts_stored = workout_stored list [@@deriving yojson]
+
 let read_all_workouts () =
   let read_all =
     [%rapper
@@ -62,7 +60,9 @@ let read_workouts_for_user user =
   workouts_stored_to_yojson workouts |> Lwt.return
 
 type workout_added = { time : int64; username : string; workout : string }
-let add_workout (workout_for_user : workout_for_user) =
+type workout_for_user = { username : string; workout : string } [@@deriving yojson]
+
+let add_workout workout_for_user =
   let time = Int64.of_float @@ Unix.time () in
   let workout_added = { time = time; username = workout_for_user.username ; workout = workout_for_user.workout } in
   let add = 
