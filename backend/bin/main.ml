@@ -32,7 +32,7 @@ let add_workout request =
   let%lwt body = Dream.body request in
   let message =
     let input_message =
-      body |> Yojson.Safe.from_string |> Workouts.workout_for_user_of_yojson
+      body |> Yojson.Safe.from_string |> Workouts.add_workout_request_of_yojson
     in
     match input_message with
     | Ok message -> message

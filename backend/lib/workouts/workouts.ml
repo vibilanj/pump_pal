@@ -25,9 +25,9 @@ let ensure_table_exists =
 
 let () = Db.dispatch ensure_table_exists |> Lwt_main.run
 
-(* queries *)
-type workout_stored = {id: int; date: int64; username: string; workout: string} [@@deriving yojson]
-type workouts_stored = workout_stored list [@@deriving yojson]
+(* read queries *)
+type workout_from_db = {id: int; date: int64; username: string; workout: string} [@@deriving yojson]
+type workouts_from_db = workout_from_db list [@@deriving yojson]
 
 let read_all_workouts () =
   let read_all =
@@ -41,11 +41,11 @@ let read_all_workouts () =
       ()
   in
   let%lwt workouts = Db.dispatch read_all in
-  workouts_stored_to_yojson workouts |> Lwt.return
+  workouts_from_db_to_yojson workouts |> Lwt.return
 
 
-type user = { username : string }
-let read_workouts_for_user user =
+type read_workouts_for_user_request = { username : string }
+let read_workouts_for_user username =
   let read_for_user =
     [%rapper
       get_many
@@ -56,15 +56,16 @@ let read_workouts_for_user user =
         |sql}
         record_in record_out]
   in
-  let%lwt workouts = Db.dispatch (read_for_user  { username = user }) in
-  workouts_stored_to_yojson workouts |> Lwt.return
+  let%lwt workouts = Db.dispatch (read_for_user { username }) in
+  workouts_from_db_to_yojson workouts |> Lwt.return
 
-type workout_added = { time : int64; username : string; workout : string }
-type workout_for_user = { username : string; workout : string } [@@deriving yojson]
+(* write queries *)
+type workout_to_db = { time : int64; username : string; workout : string }
+type add_workout_request = { username : string; workout : string } [@@deriving yojson]
 
-let add_workout workout_for_user =
+let add_workout {username; workout} =
   let time = Int64.of_float @@ Unix.time () in
-  let workout_added = { time = time; username = workout_for_user.username ; workout = workout_for_user.workout } in
+  let workout_added = { time; username ; workout } in
   let add = 
     [%rapper
       execute
