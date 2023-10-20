@@ -12,9 +12,9 @@ Gym Performance Tracker and Dashboard
 
 ## Stack
 - Dream web framework
-    - Caqti to connect to the DB
-    - PostgreSQL DB
-    - 
+- Caqti to connect to the DB
+- PostgreSQL DB
+  
     
 
 # Frontend Setup 
